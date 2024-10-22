@@ -1,0 +1,38 @@
+{
+  "name": "mx.edu.utxj.ti.awos.bienes-raices",
+  "version": "1.0.0",
+  "description": "Proyecto de Clase para la Unidad 2, de la asignatura AWOS Utilizando Node.js.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "saluda": "node index.js", 
+    "server": "nodemon saluda.js"
+  },
+  "author": "ChrisPau0530",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chrispau0530/BienesRaices_230809.git"
+  },
+  "keywords": [
+    "MVC",
+    "Express",
+    "Sequelize",
+    "MySQL",
+    "Tailwind",
+    "Nodemon",
+    "NodeJS",
+    "Mailtrap",
+    "JWT"
+  ],
+  "bugs": {
+    "url": "https://github.com/Chrispau0530/BienesRaices_230809/issues"
+  },
+  "homepage": "https://github.com/Chrispau0530/BienesRaices_230809#readme",
+  "dependencies": {
+    "express": "^4.21.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}

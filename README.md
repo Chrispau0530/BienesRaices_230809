@@ -13,8 +13,9 @@ propiedades , utilizando las reglas de negocio apropiadas para la gestion , iden
 
 |No.|Fecha|Descripcion|Potenciador|Estatus|
 |--|--|--|--|--|
-|8.|21/10/2024|Nuevo Repositorio del Proyecto implementando .gitignore|1|  ⭐ Activa|
-|9.|22/10/2023|Creacion de una Aplicacion Web usando Express|11|⭐Activa
+|8.|21/10/2024|Nuevo Repositorio del Proyecto implementando .gitignore|1| ✅ Finalizada|
+|9.|22/10/2023|Creacion de una Aplicacion Web usando Express|12|✅Finalizada|
+|10.|23/10/2023|Operaciones Basicas de un API a traves de los verbos HTTP|12|⭐Activa|
 
 
 ### Autor 

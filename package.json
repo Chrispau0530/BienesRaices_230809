@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "saluda": "node index.js", 
-    "server": "nodemon saluda.js"
+    
+    "server": "nodemon index.js.js"
   },
   "author": "ChrisPau0530",
   "license": "ISC",

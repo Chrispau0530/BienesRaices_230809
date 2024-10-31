@@ -2,6 +2,11 @@ import express from 'express';
 
 const router = express.Router();
 
+import {formularoLogin,formularioRegister,formularioPasswordRecovery} from '../controllers/usercontrollers.js';
+
+
+
+
 //GET - Se utiliza  para la lectura de datos e informacion del servidor al cliente 
 //EndPoints - S on las rutas para acceder a las secciones o funciones de nuestra apliacacion web // 2. componentes de una peticion ruta ( a donde voy) funcion callback ( que hago)
 // ":" en una ruta definen de manera posicional los parametros de entrada 
@@ -51,8 +56,9 @@ router.delete("/deleteUser/:email",function(request,response){
 
 // Exportar el router para poder usarlo en el archivo principaL
 
-
-
+router.get("/login",formularoLogin /*middleware : es cuando le damos la tarea a alguib */ )
+router.get("/createAccount",formularioRegister)
+router.get("/passwordRecovery",formularioPasswordRecovery)
 
 
 

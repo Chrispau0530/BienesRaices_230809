@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "server": "nodemon index.js.js",
+    "server": "nodemon index.js",
     "css":"postcss public/css/tailwind.css -o public/css/app.css"
   },
   "author": "ChrisPau0530",

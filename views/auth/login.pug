@@ -1,5 +1,5 @@
 extends ../layout/index 
-block contenido 
+ 
 block contenido 
     .py-10 
         h1.text-4xl-10.font-extrabold.text-center Bienes 
@@ -9,15 +9,16 @@ block contenido
         .mt-8.mx-auto.max-w-md 
             .bg-white.py-8.px-4.shadow 
             form(action="").space-y-5.px-6
-               
-                div    
+            div   
+                 div    
                      label.block.text-sm.uppercase.text-gray-600.mb-2.font-nold Correo Electronico:
-                    input#email.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder.gray-400(type="email" name="Correo_usuario " placeholder="Ingresa tu Correo electronico" ) 
+                     input#email.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder.gray-400(type="email" name="Correo_usuario " placeholder="Ingresa tu Correo electronico" ) 
 
                  div    
                      label.block.text-sm.uppercase.text-gray-600.mb-2.font-nold Contraseña
-                    input#password.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder.gray-400(type="password" name="password_usuario" placeholder="minimo de 8 caracteres" )
+                     input#password.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder.gray-400(type="password" name="password_usuario" placeholder="minimo de 8 caracteres" )
 
-                
-                input(type="submit" value="Crear Cuenta" class="w-full bg-indigo-600 hover:bg-indigo-700 text-while font-bold py-3 cursor-pointer")
+                 div
+                     input(type="submit" value="Crear Cuenta" class="w-full bg-indigo-600 hover:bg-indigo-700 text-while font-bold py-3 cursor-pointer")
 
+            

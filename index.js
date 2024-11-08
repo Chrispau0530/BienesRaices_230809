@@ -14,6 +14,13 @@ app.listen(port , ()=> {
 });
 
 //Routing - ENRUTAMIENTO.
-app.use('/',generalRouters);
-app.use('/usuario/',userRouters);
+//app.use('/',generalRouters);
+app.use('/auth',userRouters);
 //Probamos las rutas para poder presentar mensajes al usuario a traes del navegador
+
+//Habilitar pug 
+app.set('view engine' , 'pug')
+app.set('views', './views')
+
+//Carpeta Publica 
+app.use(express.static('public'))

@@ -15,7 +15,8 @@ propiedades , utilizando las reglas de negocio apropiadas para la gestion , iden
 |--|--|--|--|--|
 |8.|21/10/2024|Nuevo Repositorio del Proyecto implementando .gitignore|1| ✅ Finalizada|
 |9.|22/10/2023|Creacion de una Aplicacion Web usando Express|12|✅Finalizada|
-|10.|23/10/2023|Operaciones Basicas de un API a traves de los verbos HTTP|12|⭐Activa|
+|10.|23/10/2023|Operaciones Basicas de un API a traves de los verbos HTTP|12|✅Finalizada|
+|11.|11/11/2023|Configuracion de hojas de estilos utilizando Tailwind|11|✅Finalizada|
 
 
 ### Autor 

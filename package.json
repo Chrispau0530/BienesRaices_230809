@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "server": "nodemon index.js",
-    "css":"postcss public/css/tailwind.css -o public/css/app.css"
+    "css": "postcss public/css/tailwind.css -o public/css/app.css"
   },
   "author": "ChrisPau0530",
   "license": "ISC",
@@ -30,8 +30,12 @@
   },
   "homepage": "https://github.com/Chrispau0530/BienesRaices_230809#readme",
   "dependencies": {
+    "2": "^3.0.0",
     "express": "^4.21.1",
-    "pug": "^3.0.3"
+    "mysql": "^2.18.1",
+    "mysql2": "^3.11.4",
+    "pug": "^3.0.3",
+    "sequelize": "^6.37.5"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",

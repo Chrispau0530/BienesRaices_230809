@@ -7,7 +7,7 @@ block contenido
         h2.text-center.font-extrabold.text-2xl=page
         .mt-8.mx-auto.max-w-md
             .bg-tercero.py-8.px-4.shadow
-                form(action="").space-y-5.px-6
+                form(action="/auth/newUser" method="POST").space-y-5.px-6
                     div
                         label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold Email de Registro: 
                         input#email.w-full.px-3.py-2.border-2.border-gray-300.rounded-md(type="email" placeholder="Ej. usuario@paisdelasmaravillas.com" name="correo-usuario")

@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import db from './db/config.js'
+import db from '../db/config.js'
 
 const User = db.define('tbb_users', {
     name:{
@@ -10,6 +10,9 @@ const User = db.define('tbb_users', {
         allowNull:false,
         unique:true
     },password:{
+        type:DataTypes.STRING(50),
+        allowNull:false,
+    }, password_confirmation:{
         type:DataTypes.STRING(50),
         allowNull:false,
     },

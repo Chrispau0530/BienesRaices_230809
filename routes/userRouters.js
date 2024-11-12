@@ -14,7 +14,7 @@ router.get("/busquedaPorID/:id",function(request,response){
     response.send(`Se esta solicitando buscar al usuario por ID : ${request.params.id}`)  // 2 COMPONENTES QUE TIENE UNA PETICION  (ruta y fusion callback)
 })     
 //POST - Se utiliza para el envio de datos e informacion al cliente servidor 
-router.post("/newUser ",createNewUser)
+router.post("/newUser",createNewUser)
 //Put actualizacion completa 
 //PUT- Se utiliza para la actualizacion total de la informacion del cliente servidor 
 //a =  requeste y response = b , pide y devuelve el dato el servidor 

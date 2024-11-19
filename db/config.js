@@ -1,9 +1,11 @@
 
 import Sequelize from 'sequelize'
+import  dotenv from 'dotenv'
+dotenv.config({path :'.env'})
 
-const db=new Sequelize ('bienes_raices_230809','Christian_Rodriguez','pass12345',{
-host:"localhost",
-port:3307,
+const db=new Sequelize (process.env.BD_NAME,process.env.BD_USER,process.env.BD_PASS,{
+host:process.env.BD_HOST,
+port:3306,
 dialect:'mysql',
 define:{
     timestamps:true
@@ -12,7 +14,7 @@ pool:{
 max :5,
 min : 0,
 acquire:30000,
-idle:10000,
+idle:10000, 
 },
 
 OperatorAliases:false

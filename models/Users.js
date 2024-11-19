@@ -1,8 +1,8 @@
 import { DataTypes } from "sequelize";
 import db from '../db/config.js'
 
-const User = db.define('tbb_users', {
-    name:{
+const User = db.define('tbb_users',{
+        name: {
         type:DataTypes.STRING(50),
         allowNull:false
     },email:{

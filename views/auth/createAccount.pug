@@ -1,34 +1,35 @@
 extends ../layout/index
 
 block contenido
-    div.py-10.bg-
-        h1.text-center.font-extrabold.my-10.text-4xl.text-indigo-600 Bienes 
-            span.font-normal.text-black Raíces
-        h2.text-center.font-extrabold.text-2xl=page
-        if errores 
+        div.py-10 
+        h2.text-center.font-extrabold.my-10.text-4xl.text-flax Bienes
+            span.font-normal.text-negro Raices
+        h2.text-center.font-extrabold.text-2xl=page 
+       
+          if errors
             div(class="max-w-md mx-auto my-10")
-                each errores in errores 
-                    p.bg-red-600.text-white.uppcarse.text-us
-
-
-
-
+                each error in errors
+                    p.bg-red-600.text-blanco.uppercase.text-xs.text-center.p-2.mb-1.font-bold= error.msg
         .mt-8.mx-auto.max-w-md
-            .bg-segundo.py-8.px-4.shadow
-                form(method="POST"action="/auth/newUser" ).space-y-5.px-6
+          .bg-skyblue.py-8.px-4.shadow
+
+
+
+        
+                 form(method="POST" action="/auth/newUser" ).space-y-5.px-6
                     div
                         label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold Nombre Completo: 
-                        input#nombre.w-full.px-3.py-2.border-2.border-gray-300.rounded-md(type="text" placeholder="Ej. Juanito Peréz" name="nombre")
+                        input#name.w-full.px-3.py-2.border-2.border-gray-300.rounded-md(type="text" placeholder="Ej. Juanito Peréz" name="nombre_usuario")
                         
                     div
                         label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold Email de Registro: 
-                        input#email.w-full.px-3.py-2.border-2.border-gray-300.rounded-md(type="email" placeholder="Ej. usuario@paisdelasmaravillas.com" name="correo-usuario")
+                        input#email.w-full.px-3.py-2.border-2.border-gray-300.rounded-md(type="email" placeholder="Ej. usuario@paisdelasmaravillas.com" name="correo_usuario")
                     div
                         label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold Contraseña: 
-                        input#password.w-full.px-3.py-2.border-2.border-gray-300.rounded-md(type="password" placeholder="Minimo de 8 caracteres" name="pass-usuario")
+                        input#password.w-full.px-3.py-2.border-2.border-gray-300.rounded-md(type="password" placeholder="Minimo de 8 caracteres" name="pass_usuario")
                     div
                         label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold Confirmar Contraseña: 
-                        input#password2.w-full.px-3.py-2.border-2.border-gray-300.rounded-md(type="password" placeholder="Minimo de 8 caracteres" name="pass2-usuario")
+                        input#password2.w-full.px-3.py-2.border-2.border-gray-300.rounded-md(type="password" placeholder="Minimo de 8 caracteres" name="pass2_usuario")
                     div.flex.items-center.justify-between
                         a.text-gray-500.text-xs(href="/auth/login" class="hover:underline decoration-2 hover:decoration-red-600") ¿Ya tienes cuenta? Inicia Sesión
                         a.text-gray-500.text-xs(href="/auth/passwordRecovery" class="hover:underline decoration-2 hover:decoration-red-600") Recuperar Contraseña

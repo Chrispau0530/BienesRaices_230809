@@ -2,7 +2,7 @@ import express from 'express';
 
 const router = express.Router();
 
-import {formularoLogin,formularioRegister,formularioPasswordRecovery,createNewUser} from '../controllers/usercontrollers.js';
+import {formularoLogin,formularioRegister,formularioPasswordRecovery,createNewUser ,confirm} from '../controllers/usercontrollers.js';
 
 
 
@@ -55,6 +55,7 @@ router.delete("/deleteUser/:email",function(request,response){
 
 router.get("/login",formularoLogin /*middleware : es cuando le damos la tarea a alguien */ )
 router.get("/createAccount",formularioRegister)
+router.get("/confirmAccount/:token", confirm)
 router.get("/passwordRecovery",formularioPasswordRecovery)
 
 

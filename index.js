@@ -5,11 +5,13 @@ import express from 'express';
 import generalRouters from './routes/generalRouters.js'
 import userRouters from './routes/userRouters.js'
 import db from './db/config.js'
+import dotenv from 'dotenv';
+
 // const express = require ()
 const app = express();
 // configuramos nuestro servidor web
 
-const port = 3000;
+const port = process.env.BACKEND_PORT;
 app.listen(port , ()=> {
     console.log(`La aplicacion ha iniciado en el puerto : ${port}`);
 });

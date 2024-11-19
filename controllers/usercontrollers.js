@@ -1,5 +1,7 @@
 import User from "../models/Users.js"
 import { check,validationResult } from "express-validator"
+import {emailAfterRegistrer} from '../models/Helpers/email.js'
+import { response } from "express"
 //import {generatetId} from '../models/Helpers/tokens.js'
 //import {token} from  'graphq1'
 
@@ -41,8 +43,8 @@ const createNewUser = async (request,response) =>{
         return response.render("auth/register", {
             page: "Error al intentar crear la cuenta de Usuario",
             errors: [{msg: `El usuario ${correo_usuario} ya se encuentra registrado`}],
-            user: {
-                name: nombre_usuario
+            User: {
+                name
             }
         })
     }
@@ -51,7 +53,7 @@ const createNewUser = async (request,response) =>{
     //Validación de los campos que se reciben del formulario
 
 
-
+}
 
 
 
@@ -70,7 +72,7 @@ await check ("pass2_usuario").equals(request.body.pass2_usuario).withMessage("La
  // Verificar que el resultado es vacio 
  if(!resultado.isEmpty()){
     //Errores
-    return res.render('auth/createAccount',{
+    return response.render('auth/createAccount',{
         page : 'Crear Cuenta',
         errores: resultado.array()
     })
@@ -90,10 +92,22 @@ const newUser = await User.create({
     password:request.body.pass_usuario,
     password_confirmation:request.body.pass2_usuario,
 });
-response.json(newUser)  
+//response.json(newUser)  
 
-return;
-}
+//Enviar el correo de confirmacion 
+emailAfterRegistrer({
+ name: newUser.name.User,
+ email: newUser.email.User,
+ token: newUser.email.token
+    
+})
+
+
+
+
+
+response.render
+
 
 
 
@@ -110,5 +124,15 @@ await User.create({
   })
 
 
-export{formularoLogin,formularioRegister,formularioPasswordRecovery,createNewUser}
+  const confirm =(request,response,next) =>
+  {
+    //ValidarToken- SI existe 
+    //Confirmar cuenta 
+    //Enviar mensaje de tu cuenta ha sido confirmada
+    const {token} = req.params;
+    console.log(next)
+    console.log(`Intentando confirmar la cuenta con el token : ${req.params.token}`)
+    
+  }
+export{formularoLogin,formularioRegister,formularioPasswordRecovery,createNewUser,confirm}
 

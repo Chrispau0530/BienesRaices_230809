@@ -10,10 +10,10 @@ block contenido
                 form(action="/auth/newUser" method="POST").space-y-5.px-6
                     div
                         label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold Email de Registro: 
-                        input#email.w-full.px-3.py-2.border-2.border-gray-300.rounded-md(type="email" placeholder="Ej. usuario@paisdelasmaravillas.com" name="correo-usuario")
+                        input#email.w-full.px-3.py-2.border-2.border-gray-300.rounded-md(type="email" placeholder="Ej. usuario@paisdelasmaravillas.com" name="correo_usuario")
                     div
                         label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold Contraseña: 
-                        input#password.w-full.px-3.py-2.border-2.border-gray-300.rounded-md(type="password" placeholder="Minimo de 8 caracteres" name="pass-usuario")
+                        input#password.w-full.px-3.py-2.border-2.border-gray-300.rounded-md(type="password" placeholder="Minimo de 8 caracteres" name="pass_usuario")
                     div.flex.items-center.justify-between
                         a.text-gray-500.text-xs(href="/auth/createAccount" class="hover:underline decoration-2 hover:decoration-red-600") ¿No tienes cuenta? Registrate
                         a.text-gray-500.text-xs(href="/auth/passwordRecovery" class="hover:underline decoration-2 hover:decoration-red-600") Recuperar Contraseña

@@ -31,6 +31,10 @@
   "homepage": "https://github.com/Chrispau0530/BienesRaices_230809#readme",
   "dependencies": {
     "2": "^3.0.0",
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.7",
+    "csrf": "^3.1.0",
+    "csurf": "^1.11.0",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "express-validator": "^7.2.0",

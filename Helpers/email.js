@@ -37,4 +37,4 @@ await transport.sendMail({
 
 }
 
-export {emailAfterRegistrer}
+export  {emailAfterRegistrer}

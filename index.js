@@ -10,28 +10,30 @@ import csrf from 'csurf'
 import cookieParser from 'cookie-parser'
 
 
+
+dotenv.config({path: '.env'})
 // const express = require ()
 const app = express();
+
+
+//Habilitar la lectura de los datos del formulario por el metodo POST
+
+app.use(express.urlencoded({encoded:true}))
 // configuramos nuestro servidor web
 
-const port = 3000;
+const port = process.env.BACKEND_PORT;
 app.listen(port , ()=> {
     console.log(`La aplicacion ha iniciado en el puerto : ${port}`);
 });
 
 //Routing - ENRUTAMIENTO.
-//app.use('/',generalRouters);
+app.use('/',generalRouters);
 app.use('/auth',userRouters);
 //Probamos las rutas para poder presentar mensajes al usuario a traes del navegador
 
 
 
 
-// Habilitar Cookie Parser 
-app.use(cookieParser())
-
-// Habilitar CSRF
-app.use(csrf({cookie: true})) 
 
 //Habilitar pug 
 app.set('view engine' , 'pug')
@@ -41,9 +43,10 @@ app.set('views', './views')
 app.use(express.static('public'))
 
 
-//Habilitar la lectura de los datos del formulario por el metodo POST
 
-app.use(express.urlencoded({encoded:true}))
+
+
+
 //Conexion a la base de datos 
 try{
     await db.authenticate(); //Verifica las credenciales del usuario 
@@ -52,3 +55,9 @@ try{
 }catch(error){
     console.log(error);
 }
+
+// Habilitar Cookie Parser 
+app.use(cookieParser())
+
+// Habilitar CSRF
+app.use(csrf({cookie:true})) 

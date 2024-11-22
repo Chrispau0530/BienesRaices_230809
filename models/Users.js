@@ -18,9 +18,10 @@ const User = db.define('tbb_users',{
     },
     token: DataTypes.STRING(50),
     confirmed: DataTypes.BOOLEAN
-},{
+})
+/*{
     hooks:{
-        beforeCreate: async function(user)
+        beforeCreate: async function(User)
         {
             //Generamos la clave para el hasheo, se recomiendan 10 rondas de aleatorización para no consumir demasiados recursos de hardware y hacer lento el proceso.
              const salt = await bcrypt.genSalt(10)  
@@ -29,5 +30,6 @@ const User = db.define('tbb_users',{
 }
 
 })
+*/
 
 export default User;

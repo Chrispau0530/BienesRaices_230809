@@ -5,22 +5,22 @@ import {generatetId} from '../Helpers/tokens.js'
 
 
 
-const formularoLogin =(req,response) =>{
-    response.render("auth/login",{
+const formularoLogin =(req,res) =>{
+    res.render("auth/login",{
     page :'Formulario para el Login'
     })
 }
 
-const formularioRegister = (req,response) =>{
-    response.render("auth/createAccount",{
+const formularioRegister = (req,res) =>{
+    res.render("auth/createAccount",{
         page :'Crea una nueva cuenta'
       
 
     })
 }
 
-const formularioPasswordRecovery = (req,response) =>{
-    response.render("auth/passwordRecovery",{
+const formularioPasswordRecovery = (req,res) =>{
+    res.render("auth/passwordRecovery",{
     page :'Formulario de Recuperar contraseña'
 
     })
@@ -31,20 +31,26 @@ const formularioPasswordRecovery = (req,response) =>{
 
 
 
+
+
 const createNewUser = async (req,res) =>
     {
+        const newUser = await User.create(req.body); 
+
+        res.json(User)
+        /*
        //Validación de los campos que se reciben del formulario
        await check('nombre_usuario').notEmpty().withMessage("El nombre del usuario es un campo obligatorio.").run(req)
        await check('correo_usuario').notEmpty().withMessage("El correo electrónico es un campo obligatorio.").isEmail().withMessage("El correo electrónico no tiene el formato de: usuario@dominio.extesion").run(req)
        await check('pass_usuario').notEmpty().withMessage("La contraseña es un campo obligatorio.").isLength({min:8}).withMessage("La constraseña debe ser de almenos 8 carácteres.").run(req)
-       await check("pass2_usuario").equals(req.body.pass_usuario).withMessage("La contraseña y su confirmación deben coincidir").run(req)
+       await check("pass2_usuario").equals(res.body.pass_usuario).withMessage("La contraseña y su confirmación deben coincidir").run(req)
 
        let result = validationResult(req)
        
        //Verificamos si hay errores de validacion
        if(!result.isEmpty())
        {
-           return response.render("auth/register", {
+           return res.render("auth/createAccount", {
                page: 'Error al intentar crear la Cuenta de Usuario',
                errors: result.array(),
                user: {
@@ -75,7 +81,7 @@ const createNewUser = async (req,res) =>
        }
             
        /*console.log("Registrando a un nuevo usuario.")
-       console.log(request.body);*/
+       console.log(request.body);
 
        //Registramos los datos en la base de datos.
            const newUser = await User.create({
@@ -95,16 +101,16 @@ const createNewUser = async (req,res) =>
 
 
        response.render('templates/message', {
-           csrfToken: request.csrfToken(),
+           csrfToken: req   .csrfToken(),
            page: 'Cuenta creada satisfactoriamente.',
            msg: 'Hemos enviado un correo a : <poner el correo aqui>, para la confirmación se cuenta.'
        })
-       
+       */
    }
 
-   const confirm = async(request, response) => 
+   const confirm = async(req, resp) => 
        {
-           const {token } = request.params
+           const {token} = req.params
            //validarToken - Si existe
            console.log(`Intentando confirmar la cuenta con el token: ${token}`)
            const userWithToken = await User.findOne({where: {token}});
@@ -122,7 +128,7 @@ const createNewUser = async (req,res) =>
                userWithToken.confirmed=true;
                await userWithToken.save();
 
-               response.render('auth/accountConfirmed', {
+               res.render('auth/accountConfirmed', {
                    page: 'Excelente..!',
                    msg: 'Tu cuenta ha sido confirmada de manera exitosa.',
                    error: false

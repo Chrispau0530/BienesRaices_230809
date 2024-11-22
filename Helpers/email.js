@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 
 dotenv.config({path:'.env'})
 
-const emailAfterRegistrer = async(newUserData) =>{
+const emailAfterRegistrer = async(newUserData) =>{ 
 const transport =nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
     port:process.env.EMAIL_PORT,
@@ -28,7 +28,7 @@ await transport.sendMail({
     propiedades a traves de internet
     <br>
     <p> Ya solo necesitamoos que confirmes la cuenta que creaste , dando click a la siguiente 
-    liga <a href="${process.env.BACKEND_HOST}: ${process.env.BACKEND_PORT}/confirmAccount/ ${token}>Confirmar cuenta </a></´
+    liga <a href="${process.env.BACKEND_HOST}: ${process.env.BACKEND_PORT}auth/confirm ${token}>Confirmar cuenta </a></´
     p">
     <br>
     

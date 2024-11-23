@@ -57,7 +57,7 @@ try{
 }
 
 // Habilitar Cookie Parser 
-app.use(cookieParser())
+//app.use(cookieParser())
 
 // Habilitar CSRF
-app.use(csrf({cookie:true})) 
+//app.use(csrf({cookie:true})) 

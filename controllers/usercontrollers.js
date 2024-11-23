@@ -14,7 +14,8 @@ const formularoLogin =(req,res) =>{
 
 const formularioRegister = (req,res) =>{
     res.render("auth/createAccount",{
-        page :'Crea una nueva cuenta'
+        page :'Crea una nueva cuenta',
+        csrfToken : req.csrfToken()
       
 
     })
@@ -56,6 +57,7 @@ const createNewUser = async (req, res) => {
     if (!result.isEmpty()) {
         return res.render("auth/createAccount", {
             page: 'Error al intentar crear la Cuenta de Usuario',
+            csrfToken : req.csrfToken(),
             errors: result.array(),
             User: {
                 name: req.body.nombre_usuario,
@@ -69,6 +71,7 @@ const createNewUser = async (req, res) => {
     if (existingUser) {
         return res.render("auth/createAccount", {
             page: "Error al intentar crear la cuenta de Usuario",
+            csrfToken : req.csrfToken(),
             errors: [{ msg: `El usuario ${correo_usuario} ya se encuentra registrado` }],
             user: { name: req.body.nombre_usuario, email: req.body.correo_usuario }
         });
@@ -109,30 +112,50 @@ const createNewUser = async (req, res) => {
     } catch (error) {
         console.error("Error al registrar el usuario:", error);
         res.render("auth/createAccount", {
+            csrfToken : req.csrfToken(),
             page: "Error al crear la cuenta",
             errors: [{ msg: "Hubo un error al registrar el usuario." }]
         });
     }
 
-   
+
 
    
 }
- //Funcion que comprueba una cuenta 
-    const confirm = (req,res) => {
-    const {token } = req.params
-    
-    //Verificar si el token es valido 
-    const usuario = User.findOne({where :{token}})
-    if(!usuario){
-        return res.render('auth/accountConfirmed'),{
-        page: 'Error al confirmar tu cuenta ',
-        msg: 'Hubo error al confirmar',
-        error:true
+// Función que comprueba una cuenta
+const confirm = async (req, res) => {
+    const { token } = req.params;
+
+    try {
+        // Verificar si el token es válido
+        const usuario = await User.findOne({ where: { token } });
+
+        if (!usuario) {
+            return res.render('auth/accountConfirmed', {
+                page: 'Error al confirmar tu cuenta',
+                msg: 'Hubo un error al confirmar',
+                error: true
+            });
+        }
+
+        // Confirmar la cuenta: actualizar usuario
+        usuario.token = null;
+        usuario.confirmado = true;
+        await usuario.save();
+
+        // Mostrar mensaje de éxito
+        res.render('auth/accountConfirmed', {
+            page: 'Cuenta confirmada',
+            msg: 'La cuenta se confirmó correctamente',
+            error: false
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Hubo un error en el servidor');
     }
-}
-    
-     }
+};
+
 
 
 

@@ -13,6 +13,7 @@ block contenido
             .bg-segundo.py-8.px-4.shadow
 
                 form( method= "POST" action="/auth/createAccount").space-y-5.px-6
+                    input(type="hidden" name="_csrf" value=csrfToken)
                     div
                         label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold Nombre Completo: 
                         input#nombre.w-full.px-3.py-2.border-2.border-gray-300.rounded-md(type="text" placeholder="Ej. Juanito Peréz" name="nombre_usuario" value = User ?  User.name: '')

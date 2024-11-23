@@ -6,9 +6,9 @@ block contenido
             span.font-normal.text-black Raíces
         h2.text-center.font-extrabold.text-2xl=page
         if errors 
-            div(class="max-w-md mx-auto my-10")
+            div(class="max-w-md mx-auto my-10 divide-dashed")
                     each error in errors 
-                        p.bg-red-600.text-blanco.uppercase.text-xs.text-center.p-2.mb-1.fond-bold= error.msg
+                        p.bg-red-600.text-blanco.uppercase.text-xs.text-center.p-2.mb-1.border-hidden.animate-pulse= error.msg
         .mt-8.mx-auto.max-w-md
             .bg-segundo.py-8.px-4.shadow
 

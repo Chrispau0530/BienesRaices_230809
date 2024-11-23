@@ -2,7 +2,7 @@ import User from "../models/Users.js"
 import {check,validationResult} from "express-validator"
 import {emailAfterRegistrer} from '../Helpers/email.js'
 import {generatetId} from '../Helpers/tokens.js'
-import { where } from "sequelize"
+//import { where } from "sequelize"
 
 
 
@@ -13,11 +13,10 @@ const formularoLogin =(req,res) =>{
 }
 
 const formularioRegister = (req,res) =>{
+    //console.log(req.csrfToken());
     res.render("auth/createAccount",{
         page :'Crea una nueva cuenta',
-        csrfToken : req.csrfToken()
-      
-
+       csrfToken: req.csrfToken()
     })
 }
 
@@ -33,23 +32,25 @@ const formularioPasswordRecovery = (req,res) =>{
 
 
 const createNewUser = async (req, res) => {
+
+    //csrfToken:csrfToken()
     // Desestructurar los parámetros del request
     const { nombre_usuario, correo_usuario, password_usuario, password2_usuario } = req.body;
 
     // Validación de los campos que se reciben del formulario
     await check('nombre_usuario')
-        .notEmpty().withMessage("El nombre del usuario es un campo obligatorio.")
+        .notEmpty().withMessage( "🔙El nombre del usuario es un campo obligatorio.")
         .run(req);
     await check('correo_usuario')
-        .notEmpty().withMessage("El correo electrónico es un campo obligatorio.")
-        .isEmail().withMessage("Debe ingresar un correo electrónico válido.")
+        .notEmpty().withMessage("‼️ El correo electrónico es un campo obligatorio.")
+        .isEmail().withMessage("😫Debe ingresar un correo electrónico válido.")
         .run(req);
     await check('password_usuario')
-        .notEmpty().withMessage("La contraseña es un campo obligatorio.")
-        .isLength({ min: 8 }).withMessage("La contraseña debe ser de al menos 8 caracteres.")
+        .notEmpty().withMessage("☢️La contraseña es un campo obligatorio.")
+        .isLength({ min: 8 }).withMessage("🔕La contraseña debe ser de al menos 8 caracteres.")
         .run(req);
     await check('password2_usuario')
-        .equals(req.body.password_usuario).withMessage("La contraseña y su confirmación deben coincidir.")
+        .equals(req.body.password_usuario).withMessage("📛La contraseña y su confirmación deben coincidir.")
         .run(req);
 
     // Verificación si hay errores de validaciones
@@ -57,7 +58,7 @@ const createNewUser = async (req, res) => {
     if (!result.isEmpty()) {
         return res.render("auth/createAccount", {
             page: 'Error al intentar crear la Cuenta de Usuario',
-            csrfToken : req.csrfToken(),
+           csrfToken : req.csrfToken(),
             errors: result.array(),
             User: {
                 name: req.body.nombre_usuario,
@@ -71,7 +72,7 @@ const createNewUser = async (req, res) => {
     if (existingUser) {
         return res.render("auth/createAccount", {
             page: "Error al intentar crear la cuenta de Usuario",
-            csrfToken : req.csrfToken(),
+          csrfToken : req.csrfToken(),
             errors: [{ msg: `El usuario ${correo_usuario} ya se encuentra registrado` }],
             user: { name: req.body.nombre_usuario, email: req.body.correo_usuario }
         });
@@ -99,9 +100,9 @@ const createNewUser = async (req, res) => {
         })
 
              // Mostrar mensaje de confirmación después de crear el usuario
-        res.render('./views/templates/message', {
+        res.render("auth/login", {
             page: 'Cuenta Creada Correctamente',
-            msg: 'Hemos enviado un email de confirmación, presiona el enlace para confirmar tu cuenta.'
+            //msg: 'Hemos enviado un email de confirmación, presiona el enlace para confirmar tu cuenta.'
         });
 
 
@@ -112,7 +113,7 @@ const createNewUser = async (req, res) => {
     } catch (error) {
         console.error("Error al registrar el usuario:", error);
         res.render("auth/createAccount", {
-            csrfToken : req.csrfToken(),
+           csrfToken : req.csrfToken(),
             page: "Error al crear la cuenta",
             errors: [{ msg: "Hubo un error al registrar el usuario." }]
         });

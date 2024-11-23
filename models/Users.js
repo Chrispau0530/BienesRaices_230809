@@ -16,10 +16,7 @@ const User = db.define('tbb_users', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    password_confirmation: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
+    
     token: DataTypes.STRING,
     confirmed: DataTypes.BOOLEAN
 }, {
@@ -27,10 +24,8 @@ const User = db.define('tbb_users', {
         beforeCreate: async function (user) {
             // Generar un salt
             const salt = await bcrypt.genSalt(10);
-
-            // Hashear la contraseña principal y la de confirmación con el mismo salt
             user.password = await bcrypt.hash(user.password, salt);
-         
+
         }
     }
 });

@@ -2,6 +2,7 @@ import User from "../models/Users.js"
 import {check,validationResult} from "express-validator"
 import {emailAfterRegistrer} from '../Helpers/email.js'
 import {generatetId} from '../Helpers/tokens.js'
+import { where } from "sequelize"
 
 
 
@@ -73,22 +74,35 @@ const createNewUser = async (req, res) => {
         });
     }
 
+
+
+
     // Almacenar un Usuario después de las validaciones
     try {
-        await User.create({
+        const usuario = await User.create({
             name: nombre_usuario,
             email: correo_usuario,
             password: password_usuario,  // La contraseña será hasheada en el hook
             token: generatetId()  // Puedes generar un token si lo necesitas
         });
 
+        //Enviar email de confirmacion
+
+        emailAfterRegistrer({
+            name : usuario.name,
+            email:usuario.email,
+            token:usuario.token
+
+        })
 
              // Mostrar mensaje de confirmación después de crear el usuario
-        res.render('templates/message', {
-            pagina: 'Cuenta Creada Correctamente',
-            mensaje: 'Hemos enviado un email de confirmación, presiona el enlace para confirmar tu cuenta.'
+        res.render('./views/templates/message', {
+            page: 'Cuenta Creada Correctamente',
+            msg: 'Hemos enviado un email de confirmación, presiona el enlace para confirmar tu cuenta.'
         });
 
+
+        
 
         // Redirigir o mostrar un mensaje de éxito
       //  res.redirect('/login'); // O la ruta que elijas para redirigir
@@ -99,11 +113,29 @@ const createNewUser = async (req, res) => {
             errors: [{ msg: "Hubo un error al registrar el usuario." }]
         });
     }
+
+   
+
    
 }
+ //Funcion que comprueba una cuenta 
+    const confirm = (req,res) => {
+    const {token } = req.params
+    
+    //Verificar si el token es valido 
+    const usuario = User.findOne({where :{token}})
+    if(!usuario){
+        return res.render('auth/accountConfirmed'),{
+        page: 'Error al confirmar tu cuenta ',
+        msg: 'Hubo error al confirmar',
+        error:true
+    }
+}
+    
+     }
 
 
 
 
-export{formularoLogin,formularioRegister,formularioPasswordRecovery,createNewUser}
+ export{formularoLogin,formularioRegister,formularioPasswordRecovery,createNewUser,confirm}
 

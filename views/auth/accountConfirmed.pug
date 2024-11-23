@@ -8,7 +8,7 @@ block contenido
         h2.text-center.font-extrabold.text-2xl= page
 
     div(class="bg-white shadow py-8 px-6 rounded-lg max-w-2xl mx-auto font-bold text-white uppercase")
-        p(class= error ? 'bg-red-500': 'bg-green-500' )= msg
+        p(class= error ? 'bg-red-500': 'bg-green-500' ).py-2.px-5.rounded-lg.w-full= msg
 
         if(!error)
         a(href="/auth/login/" class="text-center font-bold text-sm text-slate-600 uppercase mt-10 block") Ya puedes iniciar sesión

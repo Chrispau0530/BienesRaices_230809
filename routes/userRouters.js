@@ -57,6 +57,7 @@ router.get("/login",formularoLogin /*middleware : es cuando le damos la tarea a 
 router.get("/createAccount",formularioRegister)
 router.post("/createAccount",createNewUser)
 router.get("/confirm/:token", confirm)
+//router.get("/fecha_nacimiento",fechaNacimiento)
 router.get("/passwordRecovery",formularioPasswordRecovery)
 
 

@@ -19,6 +19,7 @@ app.set('views', './views');
 
 // Carpeta pública
 app.use(express.static('public'));
+app.use('/public',express.static('public'));
 
 // Habilitar Cookie Parser
 app.use(cookieParser());

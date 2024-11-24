@@ -29,13 +29,32 @@ const formularioPasswordRecovery = (req,res) =>{
 
 
 
+function esMayorDeEdad(fechaNacimiento) {
+    const fechaNac = new Date(fechaNacimiento);
+    const hoy = new Date();
+
+    // Calcular la edad
+    let edad = hoy.getFullYear() - fechaNac.getFullYear();
+
+    // Ajustar si el cumpleaños no ha ocurrido este año
+    if (
+        hoy.getMonth() < fechaNac.getMonth() ||
+        (hoy.getMonth() === fechaNac.getMonth() && hoy.getDate() < fechaNac.getDate())
+    ) {
+        edad--;
+    }
+
+    return edad >= 18;
+}
+
+
 
 
 const createNewUser = async (req, res) => {
 
     //csrfToken:csrfToken()
     // Desestructurar los parámetros del request
-    const { nombre_usuario, correo_usuario, password_usuario, password2_usuario } = req.body;
+    const { nombre_usuario, correo_usuario, password_usuario, password2_usuario,fecha_usuario } = req.body;
 
     // Validación de los campos que se reciben del formulario
     await check('nombre_usuario')
@@ -52,6 +71,7 @@ const createNewUser = async (req, res) => {
     await check('password2_usuario')
         .equals(req.body.password_usuario).withMessage("📛La contraseña y su confirmación deben coincidir.")
         .run(req);
+        await check('fecha_usuario').notEmpty().withMessage(" 😞 No puede ir vacio tu fecha de nacimiento").run(req)
 
     // Verificación si hay errores de validaciones
     let result = validationResult(req);
@@ -64,6 +84,17 @@ const createNewUser = async (req, res) => {
                 name: req.body.nombre_usuario,
                 email: req.body.correo_usuario
             }
+        });
+    }
+
+
+       // Verificar si el usuario es mayor de edad
+       if (!esMayorDeEdad(fecha_usuario)) {
+        return res.render("auth/createAccount", {
+            page: "Error al intentar crear la cuenta de Usuario",
+            csrfToken: req.csrfToken(),
+            errors: [{ msg: `El usuario ${nombre_usuario} no es mayor de edad.` }],
+            user: { name: nombre_usuario, email: correo_usuario }
         });
     }
 
@@ -80,6 +111,8 @@ const createNewUser = async (req, res) => {
 
 
 
+  
+      
 
     // Almacenar un Usuario después de las validaciones
     try {
@@ -87,6 +120,7 @@ const createNewUser = async (req, res) => {
             name: nombre_usuario,
             email: correo_usuario,
             password: password_usuario,  // La contraseña será hasheada en el hook
+            fecha_nacimiento:fecha_usuario,
             token: generatetId()  // Puedes generar un token si lo necesitas
         });
 
@@ -141,7 +175,7 @@ const confirm = async (req, res) => {
 
         // Confirmar la cuenta: actualizar usuario
         usuario.token = null;
-        usuario.confirmado = true;
+        usuario.confirmed  = true;
         await usuario.save();
 
         // Mostrar mensaje de éxito
@@ -155,6 +189,9 @@ const confirm = async (req, res) => {
         console.error(error);
         res.status(500).send('Hubo un error en el servidor');
     }
+
+
+    
 };
 
 

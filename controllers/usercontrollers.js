@@ -8,7 +8,9 @@ import {generatetId} from '../Helpers/tokens.js'
 
 const formularoLogin =(req,res) =>{
     res.render("auth/login",{
-    page :'Formulario para el Login'
+    page :'Formulario para el Login',
+    csrfToken: req.csrfToken()
+
     })
 }
 
@@ -22,7 +24,8 @@ const formularioRegister = (req,res) =>{
 
 const formularioPasswordRecovery = (req,res) =>{
     res.render("auth/passwordRecovery",{
-    page :'Formulario de Recuperar contraseña'
+    page :'Formulario de Recuperar contraseña',
+    csrfToken: req.csrfToken()
 
     })
 }
@@ -159,6 +162,8 @@ const createNewUser = async (req, res) => {
 }
 // Función que comprueba una cuenta
 const confirm = async (req, res) => {
+    
+    
     const { token } = req.params;
 
     try {
@@ -195,8 +200,60 @@ const confirm = async (req, res) => {
 };
 
 
+const passwordRest = async (req,res) => {
+
+    await check('correo_usuario')
+        .notEmpty().withMessage("‼️ El correo electrónico es un campo obligatorio.")
+        .isEmail().withMessage("😫Debe ingresar un correo electrónico válido.")
+        .run(req);
 
 
 
- export{formularoLogin,formularioRegister,formularioPasswordRecovery,createNewUser,confirm}
+    // Verificación si hay errores de validaciones
+    let result = validationResult(req);
+    if (!result.isEmpty()) {
+        return res.render("auth/passwordRecovery", {
+            page: 'Error al intentar rastrear cuenta ',
+            csrfToken : req.csrfToken(),
+            errors: result.array(),
+            
+        });
+    }
+ 
+    //Desestructuramos parametros
+    const {email:correo_usuario} = req.body
+
+       
+
+    // Verificar que el usuario no existe previamente en la bd
+    const existingUser = await User.findOne({ where: { email: correo_usuario } });
+    if (existingUser) {
+        return res.render("auth/passwordRecovery", {
+            page: "Error no existe una cuenta asociada al correo electronico ingresado",
+          csrfToken : req.csrfToken(),
+            errors: [{ msg: `Por favor revisa los datos e intentalo de nuevo` }],
+            user: {  email: req.body.correo_usuario }
+        });
+    }
+
+
+}
+  
+      
+
+   
+
+       
+    
+
+
+
+   
+
+
+
+
+
+
+ export{formularoLogin,formularioRegister,formularioPasswordRecovery,createNewUser,confirm,passwordRest}
 

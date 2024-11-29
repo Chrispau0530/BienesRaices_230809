@@ -2,7 +2,7 @@ import express from 'express';
 
 const router = express.Router();
 
-import {formularoLogin,formularioRegister,formularioPasswordRecovery,createNewUser,confirm,passwordRest } from '../controllers/usercontrollers.js';
+import {formularoLogin,formularioRegister,formularioPasswordRecovery,createNewUser,confirm,passwordRest,verifyTokenPasswordChange,updatePassword} from '../controllers/usercontrollers.js';
 
 
 
@@ -62,10 +62,8 @@ router.get("/passwordRecovery",formularioPasswordRecovery)
 router.post("/passwordRecovery",passwordRest)
 
 
-
-
-
-
-
+//Actualizar contraseña 
+router.get("/passwordRecovery/:token",verifyTokenPasswordChange)
+router.post("/passwordRecovery/:token",updatePassword)
 
 export default router;

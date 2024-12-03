@@ -213,7 +213,7 @@ subject: 'Bienvenido/a al BienesRaices-230809',
                         <p> Hola,  <span style="color: red"> ${name}</span>, <br>
         Haz reportado el olvido o perdida de tu contraseña para acceder a tu cuenta de BienesRaices.
         <br>
-        <p>Por lo que necesitamos que  igreses a la siguiente liga para: <a href="${process.env.BACKEND_HOST}:${process.env.BACKEND_PORT}/auth/passwordRecovery/${token}">Actualizar Contraseña</a></p> 
+        <p>Por lo que necesitamos que  igreses a la siguiente liga para: <a href="${process.env.BACKEND_HOST}:${process.env.BACKEND_PORT}/auth/reset-password/${token}">Actualizar Contraseña</a></p> 
         
     
                 </div>

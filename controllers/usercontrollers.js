@@ -137,9 +137,9 @@ const createNewUser = async (req, res) => {
         })
 
              // Mostrar mensaje de confirmación después de crear el usuario
-        res.render("auth/login", {
+           res.render('../views/templates/message', {
             page: 'Cuenta Creada Correctamente',
-            //msg: 'Hemos enviado un email de confirmación, presiona el enlace para confirmar tu cuenta.'
+            msg: 'Hemos enviado un email de confirmación, presiona el enlace para confirmar tu cuenta.'
         });
 
 
@@ -245,8 +245,8 @@ const passwordRest = async (req,res) => {
 
 
 
-    existingUser.password="";
-    existingUser.token=  generatetId();
+    //existingUser.password="";
+    existingUser.token= generatetId();
     existingUser.save();
   
 
@@ -258,7 +258,7 @@ const passwordRest = async (req,res) => {
 })
 
 
-res.render('auth/reset-password', {
+res.render('../views/templates/message', {
     csrfToken: req.csrfToken(),
     page: 'Solicitud de actualización de contraseña aceptada',
     msg: `Hemos enviado un correo a : ${correo_usuario}, para la la actualización de tu contraseña.`
@@ -275,7 +275,7 @@ const userTokenOwner = await User.findOne({where :{token}})
 
 if(!userTokenOwner)
     { 
-        res.render('templates/message', {
+        res.render('../views/templates/message', {
             csrfToken: req.csrfToken(),
             page: 'Error',
             msg: 'El token ha expirado o no existe.'

@@ -235,4 +235,4 @@ subject: 'Bienvenido/a al BienesRaices-230809',
 
 
 
-export { emailAfterRegistrer };
+export { emailAfterRegistrer,emailChangePassword};

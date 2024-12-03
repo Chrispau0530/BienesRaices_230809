@@ -63,7 +63,7 @@ router.post("/passwordRecovery",passwordRest)
 
 
 //Actualizar contraseña 
-router.get("/passwordRecovery/:token",verifyTokenPasswordChange)
-router.post("/passwordRecovery/:token",updatePassword)
+router.get("/reset-password/:token",verifyTokenPasswordChange)
+router.post("/reset-password/:token",updatePassword)
 
 export default router;

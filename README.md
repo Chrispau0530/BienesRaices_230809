@@ -17,7 +17,8 @@ propiedades , utilizando las reglas de negocio apropiadas para la gestion , iden
 |9.|22/10/2023|Creacion de una Aplicacion Web usando Express|12|✅Finalizada|
 |10.|23/10/2023|Operaciones Basicas de un API a traves de los verbos HTTP|12|✅Finalizada|
 |11.|11/11/2023|Configuracion de hojas de estilos utilizando Tailwind|13|✅Finalizada|
-|12|23/11/2014|Integracion de Funcionalidad de Creacion de Cuentas a Usuario |30|✅Finalizado|
+|12.|23/11/2024|Integracion de Funcionalidad de Creacion de Cuentas a Usuario |30|✅Finalizado|
+|13.|28/11/2024|Implementacion de recuperacion de contraseñas|Pendiente|✅Finalizado|
 
 
 ### Autor 

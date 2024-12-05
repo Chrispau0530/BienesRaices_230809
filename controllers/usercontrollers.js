@@ -2,6 +2,8 @@ import User from "../models/Users.js"
 import {check,validationResult} from "express-validator"
 import {emailAfterRegistrer,emailChangePassword} from '../Helpers/email.js'
 import {generatetId} from '../Helpers/tokens.js'
+import { where } from "sequelize"
+import { response } from "express"
 //import { where } from "sequelize"
 
 
@@ -13,6 +15,24 @@ const formularoLogin =(req,res) =>{
 
     })
 }
+const authenticateUser =async (req,res)=>{
+//Validar que la cuenta existe 
+//Validar que el correo y la cuenta coincida en la bd
+// si-PAGINA PRINCIPAL
+//NO-Mostrar mensaje de error 
+
+const userExist = await User.findOne({where:{email:correo_usuario}})
+if(!userExist){
+    return response.render("auth/createAccount",{
+        page : 'Login',
+        errors: [{msg:`No hay un usuario asociado al correo ${email}`}],
+        csrfToken: req.csrfToken()
+        
+
+    })
+}
+}
+
 
 const formularioRegister = (req,res) =>{
     //console.log(req.csrfToken());
@@ -328,5 +348,5 @@ res.render('auth/reset-password', {
 
 
 
- export{formularoLogin,formularioRegister,formularioPasswordRecovery,createNewUser,confirm,passwordRest,updatePassword,verifyTokenPasswordChange}
+ export{formularoLogin,formularioRegister,formularioPasswordRecovery,createNewUser,confirm,passwordRest,updatePassword,verifyTokenPasswordChange,authenticateUser}
 

@@ -2,7 +2,7 @@ import express from 'express';
 
 const router = express.Router();
 
-import {formularoLogin,formularioRegister,formularioPasswordRecovery,createNewUser,confirm,passwordRest,verifyTokenPasswordChange,updatePassword} from '../controllers/usercontrollers.js';
+import {formularoLogin,formularioRegister,formularioPasswordRecovery,createNewUser,confirm,passwordRest,verifyTokenPasswordChange,updatePassword,authenticateUser} from '../controllers/usercontrollers.js';
 
 
 
@@ -54,6 +54,7 @@ router.delete("/deleteUser/:email",function(request,response){
 // Exportar el router para poder usarlo en el archivo principaL
 
 router.get("/login",formularoLogin /*middleware : es cuando le damos la tarea a alguien */ )
+router.post("/Login",authenticateUser)
 router.get("/createAccount",formularioRegister)
 router.post("/createAccount",createNewUser)
 router.get("/confirm/:token", confirm)

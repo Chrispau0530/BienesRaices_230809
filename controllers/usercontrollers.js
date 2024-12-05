@@ -229,7 +229,7 @@ const passwordRest = async (req,res) => {
        
 
     // Verificar que el usuario no existe previamente en la bd
-    const existingUser = await User.findOne({ where: {email:correo_usuario} });
+    const existingUser = await User.findOne({ where: {email:correo_usuario,confirmed:1} });
     console.log(User)
     if (!existingUser) {
         return res.render("auth/passwordRecovery", {
@@ -292,7 +292,37 @@ res.render('auth/reset-password', {
 }
 
  const updatePassword = async(request, response)=>{
-return 0;
+    const {token}= request.params
+
+    //Validar campos de contraseñas
+    await check('password_usuario_new').notEmpty().withMessage("La contraseña es un campo obligatorio.").isLength({min:8}).withMessage("La constraseña debe ser de almenos 8 carácteres.").run(request)
+    await check('confirm_new_password').equals(request.body.password_usuario_new).withMessage("La contraseña y su confirmación deben coincidir").run(request)
+
+    let result = validationResult(request)
+
+    if(!result.isEmpty())
+        {
+            return response.render("auth/reset-password", {
+                page: 'Error al intentar crear la Cuenta de Usuario',
+                errors: result.array(),
+                csrfToken: request.csrfToken(),
+                token: token
+            })
+        }
+
+    //Actualizar en BD el pass 
+    const userTokenOwner = await User.findOne({where: {token}}) 
+    userTokenOwner.password=request.body.password_usuario_new
+    userTokenOwner.token=null;
+    userTokenOwner.save();  // update tb_users set password=new_pasword where token=token;
+
+    //Renderizar la respuesta
+    response.render('auth/accountConfirmed', {
+        page: 'Excelente..!',
+        msg: 'Tu contraseña ha sido confirmada de manera exitosa.',
+        error: false
+    })
+
 }
 
 

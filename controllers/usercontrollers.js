@@ -254,7 +254,7 @@ const passwordRest = async (req,res) => {
     if (!existingUser) {
         return res.render("auth/passwordRecovery", {
           page: "Error no existe una cuenta asociada al correo electronico ingresado",
-          csrfToken : req.csrfToken(),
+             csrfToken : req.csrfToken(),
             errors: [{ msg: `Por favor revisa los datos e intentalo de nuevo` }],
             User: {  email: req.body.correo_usuario }
         });
@@ -265,7 +265,7 @@ const passwordRest = async (req,res) => {
 
 
 
-    //existingUser.password="";
+    existingUser.password="";
     existingUser.token= generatetId();
     existingUser.save();
   
